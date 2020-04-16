@@ -1,40 +1,142 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <el-button @click="login()" type="success">登录</el-button>
+    <el-button @click="getdata()" type="success">取得数据</el-button>
+    <h1 :class="mc">{{ msg }}</h1>
+    <h1 :class="mc">{{ title }}</h1>
+    <p>{{name}}</p>
+    <p>{{age}}</p>
+    <p>{{ inhere }}</p>
+
+    <table>
+      <thead>
+        <th>用户ID</th>
+        <th>用户名称</th>
+        <th>可用</th>
+        <th>创建时间</th>
+      </thead>
+      <tbody>
+        <tr v-for="item in persons" v-bind:key="item">
+          <td>{{ item.userid }}</td>
+          <td>{{ item.username }}</td>
+          <td>{{ item.enabled }}</td>
+          <td>{{ item.create_time }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
+import axios from "../myaxios";
+import { getCookie } from "../cookie"
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: String,
+    title: String
+  },
+  data () {
+    return {
+      persons: [],
+      name: '555eee',
+      age: '',
+      inhere: '',
+      mc: 'gg'
+    }
+  },
+  methods: {
+    login () {
+      this.mc = "gg1"
+      axios.post("/apis/login", { "username": "root", "password": "1234567" }, (status, data) => {
+        console.log("-------->" + status + data);
+        if ((status != null) && (status == 200)) {
+
+          alert(data);
+
+        }
+
+      }, () => {
+        console.log("登录错误");
+
+      });
+    },
+    getdata () {
+      axios.get("/apis/g2", {}, (response) => {
+        alert(getCookie("XSRF-TOKEN"));
+        console.log("------>response" + response);
+        if (response.status == 200) {
+          const result = response.data;
+          this.persons = result;
+          console.log(result);
+        }
+      }, (error) => {
+
+        console.log("--->enter errors");
+        if (error.response) {
+          // 请求已发出，但服务器响应的状态码不在 2xx 范围内
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message);
+        }
+        console.log(error.config);
+      }
+      );
+    }
+  },
+  mounted () {
+    console.log("----------->" + process.env.NODE_ENV);
+    // axios.get("/apis/tp", {}, (response) => {
+    //   console.log(response);
+    //   if (response.status == 200) {
+    //     const result = response.data;
+    //     this.name = result.name;
+    //     this.age = result.age;
+    //     this.inhere = result.inhere;
+    //   }
+    // }
+    // );
+
+
+    // 发ajax请求，用以获取数据，此处地址意思是查询 github中 vue 星数最高的项目
+    //const url = 'http://192.168.3.180:8000/tp';
+    // const url1 = '/apis/t2';
+    // //axios.defaults.changeOrigin = true
+    // const params = new URLSearchParams();
+    // params.append('user', { "name": "fdfd", "age": 43, "inhere": "2019-12-3" });
+    // // params.append('age', 12);
+    // axios.post(url1, params).then(
+    //   response => {
+    //     const result = response.data;
+    //     console.log(result)
+
+
+    //   }
+    // ).catch(
+    //   response => {
+    //     alert('请求失败' + response);
+    //   },
+    // );
+
+
+
+    // axios.get(url).then(
+    //   response => {
+    //     const result = response.data;
+    //     console.log(result)
+    //     this.name = result.name;
+    //     this.age = result.age;
+    //     this.inhere = result.inhere;
+
+    //   }
+    // ).catch(
+    //   response => {
+    //     alert('请求失败' + response);
+    //   },
+    // );
   }
 }
 </script>
@@ -54,5 +156,11 @@ li {
 }
 a {
   color: #42b983;
+}
+.gg {
+  color: cornflowerblue;
+}
+.gg1 {
+  color: red;
 }
 </style>
