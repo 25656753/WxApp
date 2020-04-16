@@ -48,7 +48,7 @@ export default {
   methods: {
     login () {
       this.mc = "gg1"
-      axios.post("/apis/login", { "username": "root", "password": "1234567" }, (status, data) => {
+      axios.post("/apis/login", { "username": "root", "password": "123456" }, (status, data) => {
         console.log("-------->" + status + data);
         if ((status != null) && (status == 200)) {
 

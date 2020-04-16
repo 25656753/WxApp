@@ -1,18 +1,27 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/smallappimg.jpg" />
-    <HelloWorld msg="中科芯海智能科技" title="欢迎您" />
+
+    <header>
+      <!-- router-link 定义点击后导航到哪个路径下 -->
+      <p>
+        <router-link to="/home">精子检测</router-link>
+      </p>
+      <p>
+        <router-link to="/about">查询</router-link>
+      </p>
+    </header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import router from './router'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  router,
 }
 </script>
 
