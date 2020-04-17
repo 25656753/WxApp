@@ -1,5 +1,5 @@
 //项目域名地址
-let URL = "http://192.168.3.181:8000";
+let URL = "http://192.168.3.180:8000";
 
 let ROOT;
 //由于封装的axios请求中，会将ROOT打包进去，为了方便之后不再更改，判断了当前环境，而生成的不同的ROOT
@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "development") {
   ROOT = "/apis";
 } else {
   //生产环境下的地址
-  ROOT = URL;
+  ROOT = "/apis";
 }
 // export default { ROOT, URL };
 exports.URL = URL; //代理指向地址

@@ -17,7 +17,6 @@ if (env === 'development') {
   console.log("api");
 } else if (env === 'production') {
   console.log("pro");
-  root = 'pros';
 } else {
   throw '请检查process.env.NODE_ENV的值，是否符合这些值之一：development，production';
 }
@@ -80,7 +79,7 @@ function apiAxios (method, url, params, success, failure) {
   } else {
     base = root;
   }
-
+  console.log('base:' + base);
 
   //请求拦截(必须放在配置axios前面)
   axios.interceptors.request.use(config => {
