@@ -17,7 +17,7 @@ if (env === 'development') {
   console.log("api");
 } else if (env === 'production') {
   console.log("pro");
-  root = '';
+  root = 'pros';
 } else {
   throw '请检查process.env.NODE_ENV的值，是否符合这些值之一：development，production';
 }
