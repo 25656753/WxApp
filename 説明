@@ -1,0 +1,21 @@
+
+server {
+    listen      80;
+    server_name localhost;
+    charset     utf-8;
+
+
+location /apis {
+rewrite ^.+apis/?(.*)$ /$1 break;
+proxy_pass http://192.168.3.180:8000;
+}
+
+location / {
+        root   /home/jam/dist;
+        index   index.html;
+    }
+    
+    
+
+
+}
