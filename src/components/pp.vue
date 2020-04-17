@@ -1,5 +1,7 @@
 <template>
   <div>
+    <a href="http://masschip.cn">masschip</a>
+    <p>masschip</p>
     <h1>{{a}}</h1>
     <input type="text" v-aa v-model="a" />
   </div>

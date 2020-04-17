@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/smallappimg.jpg" />
-
+    <img alt="Vue logo" src="../../assets/smallappimg.jpg" />
+    <p>
+      <a href="/wx.html">转到WX主页</a>
+    </p>
     <header>
       <!-- router-link 定义点击后导航到哪个路径下 -->
       <p>
