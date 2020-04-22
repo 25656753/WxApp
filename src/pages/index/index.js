@@ -3,16 +3,19 @@ import Vue from 'vue'
 
 
 import App from './App.vue'
-
+import store from '../../../vuex/store'
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 
 new Vue({
+  store,    //导入vuex 状态管理
   render: h => h(App),
+
   // beforeCreate () {
   //   console.log("创建前：");
   //   console.log(this.$el);

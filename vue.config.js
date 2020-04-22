@@ -2,6 +2,7 @@ const pageutils = require('./vue.util')
 // 引进config.js
 const BaseUrl = require("./src/config.js");
 console.log("BaseUrl.URL---------------------" + BaseUrl.URL);
+
 module.exports = {
   configureWebpack: {       //进入断点
     devtool: 'source-map'
@@ -36,6 +37,6 @@ module.exports = {
       // },
 
     }
-  },
-
+  }
 }
+

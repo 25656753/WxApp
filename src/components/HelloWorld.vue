@@ -58,7 +58,7 @@ export default {
 
       }, () => {
         console.log("登录错误");
-
+        alert("登录错误");
       });
     },
     getdata () {

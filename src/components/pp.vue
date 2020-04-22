@@ -3,10 +3,15 @@
     <a href="http://masschip.cn">masschip</a>
     <p>masschip</p>
     <h1>{{a}}</h1>
-    <input type="text" v-aa v-model="a" />
+    <h1>
+      <h3>{{$store.state.count}}</h3>
+      <el-button @click="$store.state.count++">clikc</el-button>
+    </h1>
+    <el-button @click="userlogin()">login</el-button>
   </div>
 </template>
 <script>
+import { login } from "../axiosauth2"
 export default {
   name: "pp",
   data: function () {
@@ -23,6 +28,10 @@ export default {
         el.val = "please";
       }
     }
+  },
+  methods: {
+    userlogin () {
+      login(this);    }
   }
 
 }
